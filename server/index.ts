@@ -61,7 +61,11 @@ app.use((req, res, next) => {
   // Use a port provided by environment variable or fallback to 5000
   // this serves both the API and the client.
   const port = process.env.PORT || 3000;
-  server.listen(port, () => {
-    console.log(`Server listening on port http://localhost:${port}`);
-  })
+  server.listen({
+    port,
+    host: "0.0.0.0",
+    reusePort: true,
+  }, () => {
+    log(`serving on port ${port}`);
+  });
 })();
